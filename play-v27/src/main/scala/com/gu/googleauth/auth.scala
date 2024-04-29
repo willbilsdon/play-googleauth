@@ -3,13 +3,15 @@ package com.gu.googleauth
 import java.math.BigInteger
 import java.nio.charset.StandardCharsets.UTF_8
 import java.security.SecureRandom
-import java.time.{Clock, Duration}
+import java.time.Clock
 import java.util.{Base64, Date}
+
 import com.gu.googleauth.AntiForgeryChecker._
 import com.gu.play.secretrotation.DualSecretTransition.InitialSecret
 import com.gu.play.secretrotation.SnapshotProvider
 import io.jsonwebtoken.SignatureAlgorithm.HS256
 import io.jsonwebtoken._
+import org.joda.time.Duration
 import play.api.Logging
 import play.api.http.HeaderNames.USER_AGENT
 import play.api.http.HttpConfiguration
@@ -201,7 +203,7 @@ object GoogleAuth {
       "redirect_uri" -> Seq(config.redirectUrl),
       "state" -> Seq(config.antiForgeryChecker.generateToken(sessionId))) ++
       hdParameter(config.domains).map(domain => "hd" -> Seq(domain)) ++
-      config.maxAuthAge.map(age => "max_auth_age" -> Seq(s"${age.toSeconds}")) ++
+      config.maxAuthAge.map(age => "max_auth_age" -> Seq(s"${age.getStandardSeconds}")) ++
       config.prompt.map(prompt => "prompt" -> Seq(prompt)) ++
       userIdentity.map(_.email).map("login_hint" -> Seq(_))
 

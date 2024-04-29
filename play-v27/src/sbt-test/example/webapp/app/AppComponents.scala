@@ -10,7 +10,7 @@ import play.api.{ApplicationLoader, BuiltInComponentsFromContext}
 import play.filters.HttpFiltersComponents
 import router.Routes
 
-import scala.jdk.CollectionConverters._
+import scala.collection.JavaConverters._
 
 class AppComponents(context: ApplicationLoader.Context)
   extends BuiltInComponentsFromContext(context)

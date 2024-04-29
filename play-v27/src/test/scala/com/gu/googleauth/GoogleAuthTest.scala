@@ -184,7 +184,7 @@ object GoogleAuthTest {
       given_name = identity.firstName,
       family_name = identity.lastName,
       picture = identity.avatarUrl,
-      locale = "en_GB",
+      locale = Some("en_GB"),
       profile = None,
       hd = None
     )
